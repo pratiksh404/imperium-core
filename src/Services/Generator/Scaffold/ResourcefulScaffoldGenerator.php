@@ -5,8 +5,6 @@ namespace Pratiksh\Imperium\Services\Generator\Scaffold;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Pratiksh\Imperium\Contracts\Imperium\Generator\GeneratorInterface;
-use App\Models\Permission;
-use App\Models\Role;
 use Pratiksh\Imperium\Services\Generator\Generator;
 
 use function Laravel\Prompts\confirm;
@@ -40,13 +38,13 @@ class ResourcefulScaffoldGenerator extends Generator implements GeneratorInterfa
     private function selectiveGeneration()
     {
         $options = [
-            'Model' => fn() => $this->generateResourcefulModel(),
-            'Controller' => fn() => $this->generateResourcefulController(),
-            'Vue Component' => fn() => $this->generateResourcefulVueComponent(),
-            'Repository' => fn() => $this->generateResourcefulRepository(),
-            'Policy' => fn() => $this->generateResourcefulPolicy(),
-            'Migration' => fn() => $this->generateMigration(),
-            'Authorization' => fn() => $this->generateAuthorization(),
+            'Model' => fn () => $this->generateResourcefulModel(),
+            'Controller' => fn () => $this->generateResourcefulController(),
+            'Vue Component' => fn () => $this->generateResourcefulVueComponent(),
+            'Repository' => fn () => $this->generateResourcefulRepository(),
+            'Policy' => fn () => $this->generateResourcefulPolicy(),
+            'Migration' => fn () => $this->generateMigration(),
+            'Authorization' => fn () => $this->generateAuthorization(),
         ];
 
         $selectedOptions = multiselect(
@@ -64,14 +62,14 @@ class ResourcefulScaffoldGenerator extends Generator implements GeneratorInterfa
     {
         $generator = new ResourcefulModelGenerator($this->name);
         $model = $generator->generateResourcefulModel();
-        $this->logSuccess('Model generated successfully : ' . $model);
+        $this->logSuccess('Model generated successfully : '.$model);
     }
 
     private function generateResourcefulController()
     {
         $generator = new ResourcefulControllerGenerator($this->name);
         $controller = $generator->generateResourcefulController();
-        $this->logSuccess('Controller generated successfully : ' . $controller);
+        $this->logSuccess('Controller generated successfully : '.$controller);
     }
 
     private function generateResourcefulVueComponent()
@@ -79,15 +77,15 @@ class ResourcefulScaffoldGenerator extends Generator implements GeneratorInterfa
         $generator = new ResourcefulVueComponentGenerator($this->name);
         $index = $generator->generateModuleIndex();
         $form = $generator->generateModuleForm();
-        $this->logSuccess('Vue module index components generated successfully : ' . $index);
-        $this->logSuccess('Vue module form components generated successfully : ' . $form);
+        $this->logSuccess('Vue module index components generated successfully : '.$index);
+        $this->logSuccess('Vue module form components generated successfully : '.$form);
     }
 
     private function generateResourcefulPolicy()
     {
         $generator = new ResourcefulPolicyGenerator($this->name);
         $policy = $generator->generateResourcefulPolicy();
-        $this->logSuccess('Policy generated successfully : ' . $policy);
+        $this->logSuccess('Policy generated successfully : '.$policy);
     }
 
     private function generateResourcefulRepository()
@@ -95,14 +93,14 @@ class ResourcefulScaffoldGenerator extends Generator implements GeneratorInterfa
         $generator = new ResourcefulRepositoryGenerator($this->name);
         $repository = $generator->generateRepository();
         $interface = $generator->generateInterface();
-        $this->logSuccess('Repository generated successfully : ' . $repository);
-        $this->logSuccess('Interface generated successfully : ' . $interface);
+        $this->logSuccess('Repository generated successfully : '.$repository);
+        $this->logSuccess('Interface generated successfully : '.$interface);
     }
 
     private function generateMigration()
     {
         Artisan::call('make:migration', [
-            'name' => 'create_' . strtolower(Str::plural($this->name)) . '_table',
+            'name' => 'create_'.strtolower(Str::plural($this->name)).'_table',
             '--create' => strtolower(Str::plural($this->name)),
         ]);
         $this->logSuccess('Migration generated successfully.');

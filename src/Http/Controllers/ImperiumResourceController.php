@@ -3,7 +3,6 @@
 namespace Pratiksh\Imperium\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Pratiksh\Imperium\Http\Controllers\Controller;
 
 class ImperiumResourceController extends Controller
 {
@@ -23,10 +22,10 @@ class ImperiumResourceController extends Controller
 
                     return $dependable_field->getDependencies($request);
                 } else {
-                    return response()->json(['error' => $module_name . ' resource class does not have any dependable fields ' . $dependable_field_name], 400);
+                    return response()->json(['error' => $module_name.' resource class does not have any dependable fields '.$dependable_field_name], 400);
                 }
             } else {
-                return response()->json(['error' => $module_name . ' resource class does not have any form fields'], 400);
+                return response()->json(['error' => $module_name.' resource class does not have any form fields'], 400);
             }
         } catch (\Throwable $th) {
             throw $th;
@@ -37,6 +36,7 @@ class ImperiumResourceController extends Controller
     {
         try {
             $resource = getResource($module_name);
+
             return $resource[$action_name]($request);
         } catch (\Throwable $th) {
             throw $th;

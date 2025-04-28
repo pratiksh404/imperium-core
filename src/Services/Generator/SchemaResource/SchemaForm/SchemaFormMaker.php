@@ -17,7 +17,7 @@ class SchemaFormMaker
     {
         $this->module_name = $module_name;
 
-        $requestFileName = Str::studly($module_name) . 'Request';
+        $requestFileName = Str::studly($module_name).'Request';
 
         if (! isset(getFilesWithPaths(app_path('Http/Requests'))[$requestFileName])) {
             throw new \Exception('Request file not found');
@@ -47,7 +47,7 @@ class SchemaFormMaker
 
         $fieldCode = '';
         foreach ($information_data as $fieldName => $info) {
-            $fieldCode .= (InputFieldMaker::for($info))->grab() . "\n";
+            $fieldCode .= (InputFieldMaker::for($info))->grab()."\n";
         }
 
         return $fieldCode;
@@ -68,16 +68,16 @@ class SchemaFormMaker
             } elseif ($rule === 'required') {
                 $fieldCode .= '->required()';
             } elseif (strpos($rule, 'unique:') === 0) {
-                $fieldCode .= "->unique('" . substr($rule, 7) . "')";
+                $fieldCode .= "->unique('".substr($rule, 7)."')";
             } elseif (strpos($rule, 'exists:') === 0) {
-                $fieldCode .= "->exists('" . substr($rule, 7) . "')";
+                $fieldCode .= "->exists('".substr($rule, 7)."')";
             }
         }
 
         // Assuming 'user_id' needs to be a SelectField
         if ($fieldName === 'user_id') {
             $fieldCode = "SelectField::make('$fieldName', 'User')"
-                . "->optionCollection(Imperium::user()->all(), 'name', 'id')";
+                ."->optionCollection(Imperium::user()->all(), 'name', 'id')";
         }
 
         return $fieldCode;
