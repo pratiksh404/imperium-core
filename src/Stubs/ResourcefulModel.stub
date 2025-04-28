@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Pratiksh\Imperium\Traits\HasPosition;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class {{modelName}} extends Model
+{
+    use HasPosition,SoftDeletes;
+
+    protected $guarded = [];
+}

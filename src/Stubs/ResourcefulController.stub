@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Http\Controllers\Admin\Resourceful;
+
+use App\Contracts\{{modelName}}RepositoryInterface;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{{modelName}}Request;
+use {{modelNamespace}};
+
+
+class {{modelName}}Controller extends Controller
+{
+    protected ${{modelNameSingularLowercase}}RepositoryInterface;
+
+    public function __construct({{modelName}}RepositoryInterface ${{modelNameSingularLowercase}}RepositoryInterface)
+    {
+        $this->{{modelNameSingularLowercase}}RepositoryInterface = ${{modelNameSingularLowercase}}RepositoryInterface;
+        $this->authorizeResource({{modelName}}::class);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        return inertia('Admin/Modules/{{modelName}}/Index', $this->{{modelNameSingularLowercase}}RepositoryInterface->index());
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store({{modelName}}Request $request)
+    {
+        $this->{{modelNameSingularLowercase}}RepositoryInterface->store($request);
+
+        return to_route('{{modelNamePluralLowercase}}.index');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{modelName}} ${{modelNameSingularLowercase}})
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit({{modelName}} ${{modelNameSingularLowercase}})
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update({{modelName}}Request $request, {{modelName}} ${{modelNameSingularLowercase}})
+    {
+        $this->{{modelNameSingularLowercase}}RepositoryInterface->update($request, ${{modelNameSingularLowercase}});
+
+        return to_route('{{modelNamePluralLowercase}}.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy({{modelName}} ${{modelNameSingularLowercase}})
+    {
+        $this->{{modelNameSingularLowercase}}RepositoryInterface->destroy(${{modelNameSingularLowercase}});
+
+        return to_route('{{modelNamePluralLowercase}}.index');
+    }
+}

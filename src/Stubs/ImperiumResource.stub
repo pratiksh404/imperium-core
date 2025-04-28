@@ -1,0 +1,69 @@
+<?php
+
+namespace App\Resource;
+
+use {{modelNamespace}};
+use Pratiksh\Imperium\Services\Resource\DataTable\Columns\TextColumn;
+use Pratiksh\Imperium\Services\Resource\DataTable\DataTable;
+use Pratiksh\Imperium\Services\Resource\Form\Fields\TextField;
+use Pratiksh\Imperium\Services\Resource\Form\Form;
+use Pratiksh\Imperium\Services\Resource\Navigation\Breadcrumb;
+use Pratiksh\Imperium\Services\Resource\Navigation\BreadcrumbItem;
+use Pratiksh\Imperium\Services\Resource\Navigation\MenuItem;
+use Pratiksh\Imperium\Services\Resource\Navigation\Navigation;
+use Pratiksh\Imperium\Services\Resource\Navigation\PageHeader;
+use Pratiksh\Imperium\Services\Resource\Navigation\HeaderPoint;
+use Pratiksh\Imperium\Services\Resource\Resource;
+
+class {{modelName}}Resource extends Resource
+{
+    public static $model = {{modelName}}::class;
+
+    public static $name = '{{modelName}}';
+
+    public static $icon = 'pi pi-shield';
+
+    public static $route = '{{modelNamePluralLowercase}}';
+
+    public function dataTable(): DataTable
+    {
+        return (new DataTable)
+            ->columns([
+                TextColumn::make('id'),
+            ]);
+    }
+
+    public function form(): Form
+    {
+        return (new Form)
+            ->fields([
+                // Add fields here
+            ]);
+    }
+
+    public function navigation(): Navigation
+    {
+        $auth_user = $this->authUser;
+
+        return (new Navigation)
+            ->menus([
+                MenuItem::make('{{modelNamePluralUppercase}}')
+                    ->icon(self::$icon)
+                    ->url(route('{{modelNamePluralLowercase}}.index'))
+                   ->authorize($auth_user->can('viewAny', {{modelName}}::class)),
+            ])
+            ->headers([
+                PageHeader::make('{{modelNamePluralUppercase}}', '{{modelNamePluralLowercase}}.index')
+                    ->breadcrumb(
+                        Breadcrumb::make('{{modelNamePluralUppercase}}', '{{modelNamePluralLowercase}}.index')
+                            ->items([
+                                BreadcrumbItem::make('{{modelName}} List', route('{{modelNamePluralLowercase}}.index')),
+                            ])
+                    )
+                    ->points([
+                        HeaderPoint::make('Total {{modelNamePluralUppercase}} : '.{{modelName}}::count(), 'pi pi-shield'),
+                        HeaderPoint::make('Trash {{modelNamePluralUppercase}} : '.{{modelName}}::onlyTrashed()->count(), 'pi pi-trash'),
+                    ]),
+            ]);
+    }
+}

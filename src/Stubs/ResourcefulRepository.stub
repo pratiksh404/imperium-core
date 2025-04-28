@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Repositories;
+
+Pratiksh\Imperium\Repositories\ResourcefulRepository;
+use App\Contracts\{{modelName}}RepositoryInterface;
+use {{modelNamespace}};
+
+class {{modelName}}Repository extends ResourcefulRepository implements {{modelName}}RepositoryInterface
+{
+    public function __construct({{modelName}} $model)
+    {
+        parent::__construct($model);
+    }
+}

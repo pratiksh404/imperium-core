@@ -1,0 +1,16 @@
+<template>
+    <div>
+        <ModuleDataListPage name="{{modelName}}" :url="route('{{modelNamePluralLowercase}}.store')" :module-form="{{modelName}}Form">
+
+            <template v-slot:table>
+                <ModuleTable name="{{modelName}}" :data="$page.props.{{modelNamePluralLowercase}}" :trashed-data="$page.props.trashed_{{modelNamePluralLowercase}}"
+                    :module-form="{{modelName}}Form" />
+            </template>
+        </ModuleDataListPage>
+    </div>
+</template>
+<script setup>
+import ModuleDataListPage from "@Imperium/Components/Modules/ListPage.vue"
+import {{modelName}}Form from "@Imperium/Components/Form/{{modelName}}/Form.vue"
+import ModuleTable from "@Imperium/Components/Modules/Table.vue"
+</script>
