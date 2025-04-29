@@ -97,7 +97,6 @@ arch('service Header/Navigation/HeaderNavigation complies with imperium header n
         'authorize',
     ]);
 
-
 // Traits Concerns
 arch('it will not contain anything but traits in Traits folder')
     ->expect(['Pratiksh\Imperium\Traits'])
