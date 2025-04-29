@@ -22,20 +22,21 @@ class SchemaRuleGenerator extends Generator implements GeneratorInterface
         // Convert the rules array into a properly formatted PHP array string
         $formatValue = function ($v) use (&$formatValue) {
             if (is_array($v)) {
-                return '[' . implode(', ', array_map($formatValue, $v)) . ']';
+                return '['.implode(', ', array_map($formatValue, $v)).']';
             }
             if (is_string($v)) {
-                return "'" . addslashes($v) . "'";
+                return "'".addslashes($v)."'";
             }
             if (is_bool($v)) {
                 return $v ? 'true' : 'false';
             }
+
             return $v;
         };
 
-        $moduleRules = '[' . implode(",\n", array_map(function ($key, $value) use ($formatValue) {
-            return "'" . addslashes($key) . "' => " . $formatValue($value);
-        }, array_keys($rules), $rules)) . ']';
+        $moduleRules = '['.implode(",\n", array_map(function ($key, $value) use ($formatValue) {
+            return "'".addslashes($key)."' => ".$formatValue($value);
+        }, array_keys($rules), $rules)).']';
 
         $template = str_replace(
             [
@@ -49,6 +50,6 @@ class SchemaRuleGenerator extends Generator implements GeneratorInterface
             $this->getStub('ResourcefulRequest'),
         );
 
-        return $this->makeFile(app_path('Http/Requests/' . $this->name . 'Request.php'), $template);
+        return $this->makeFile(app_path('Http/Requests/'.$this->name.'Request.php'), $template);
     }
 }

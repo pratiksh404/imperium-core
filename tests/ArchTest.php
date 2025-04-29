@@ -103,7 +103,6 @@ arch('it will not contain anything but traits in Traits folder')
     ->expect(['Pratiksh\Imperium\Traits'])
     ->toBeTraits();
 
-
 arch()->preset()->php();
 arch()->preset()->security();
 arch()->preset()->laravel();
