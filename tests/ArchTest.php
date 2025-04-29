@@ -43,6 +43,61 @@ arch('repository ResourcefulRepository complies with imperium resourceful interf
         'destroy',
     ]);
 
+// Service Concerns
+// Action Services Concerns
+arch('service ActionService complies with imperium action mechanism')
+    ->expect(['Pratiksh\Imperium\Services\Action\ActionResponse'])
+    ->toBeClasses()
+    ->toHaveMethods([
+        'success',
+        'error',
+        'paginated',
+    ]);
+// Control Services Concerns
+arch('service Control/Sidebar complies with imperium sidebar mechanism')
+    ->expect(['Pratiksh\Imperium\Services\Control\Sidebar'])
+    ->toBeClasses()
+    ->toHaveMethods([
+        'includeUserProfile',
+        'collapsed',
+        'includeApplicationLogo',
+    ]);
+arch('service Control/Menu complies with imperium menu mechanism')
+    ->expect(['Pratiksh\Imperium\Services\Control\Menu'])
+    ->toBeClasses()
+    ->toHaveMethods([
+        'make',
+        'toArray',
+    ]);
+arch('service Control/Imperium complies with imperium control mechanism')
+    ->expect(['Pratiksh\Imperium\Services\Control\Imperium'])
+    ->toBeClasses()
+    ->toHaveMethods([
+        'menu',
+        'header',
+        'sidebar',
+        'homeRoute',
+    ]);
+arch('service Header/Header complies with imperium header mechanism')
+    ->expect(['Pratiksh\Imperium\Services\Control\Header\Header'])
+    ->toBeClasses()
+    ->toHaveMethods([
+        'navigation',
+        'includeThemeSwitcher',
+        'includeHeaderMenu',
+        'includeBreadcrumb',
+    ]);
+arch('service Header/Navigation/HeaderNavigation complies with imperium header navigation mechanism')
+    ->expect(['Pratiksh\Imperium\Services\Control\Header\Navigation\HeaderNavigation'])
+    ->toBeClasses()
+    ->toHaveMethods([
+        'profileMenus',
+        'headerLinkMenus',
+        'headerFlyoutMenus',
+        'authorize',
+    ]);
+
+
 // Traits Concerns
 arch('it will not contain anything but traits in Traits folder')
     ->expect(['Pratiksh\Imperium\Traits'])
