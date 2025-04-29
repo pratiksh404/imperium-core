@@ -39,9 +39,9 @@ class ResourcefulRepositoryGeneratorCommand extends Command
         $generator = new ResourcefulRepositoryGenerator($model, $namespace);
 
         $repository = $generator->generateRepository();
-        info('Repository created successfully at [' . $repository . ']');
+        info('Repository created successfully at ['.$repository.']');
 
         $interface = $generator->generateInterface();
-        info('Interface created successfully [' . $interface . ']');
+        info('Interface created successfully ['.$interface.']');
     }
 }
