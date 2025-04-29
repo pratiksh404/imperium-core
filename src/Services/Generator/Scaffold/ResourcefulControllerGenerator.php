@@ -3,7 +3,7 @@
 namespace Pratiksh\Imperium\Services\Generator\Scaffold;
 
 use Illuminate\Support\Str;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\GeneratorInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\GeneratorInterface;
 use Pratiksh\Imperium\Services\Generator\Generator;
 
 class ResourcefulControllerGenerator extends Generator implements GeneratorInterface
@@ -36,6 +36,6 @@ class ResourcefulControllerGenerator extends Generator implements GeneratorInter
             $this->getStub('ResourcefulController'),
         );
 
-        return $this->makeFile(app_path('Http/Controllers/Admin/Resourceful/'.$this->name.'Controller.php'), $template);
+        return $this->makeFile(app_path('Http/Controllers/Admin/Resourceful/' . $this->name . 'Controller.php'), $template);
     }
 }

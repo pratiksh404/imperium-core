@@ -14,7 +14,7 @@ class PageHeader
 
     public array $actions;
 
-    public function __construct(string $title, string $for)
+    final public function __construct(string $title, string $for)
     {
         $this->title = $title;
         $this->for = $for;
@@ -55,7 +55,7 @@ class HeaderPoint
 
     public $authorize = true;
 
-    public function __construct(string $information, ?string $icon = null)
+    final public function __construct(string $information, ?string $icon = null)
     {
         $this->information = $information;
         $this->icon = $icon;

@@ -2,7 +2,7 @@
 
 namespace Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaRules;
 
-use Pratiksh\Imperium\Contracts\Imperium\Generator\GeneratorInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\GeneratorInterface;
 use Pratiksh\Imperium\Services\Generator\Generator;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\DatabaseSchema;
 
@@ -40,6 +40,6 @@ class SchemaRuleGenerator extends Generator implements GeneratorInterface
             $this->getStub('ResourcefulRequest'),
         );
 
-        return $this->makeFile(app_path('Http/Requests/'.$this->name.'Request.php'), $template);
+        return $this->makeFile(app_path('Http/Requests/' . $this->name . 'Request.php'), $template);
     }
 }

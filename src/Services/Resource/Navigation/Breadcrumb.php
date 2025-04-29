@@ -10,7 +10,7 @@ class Breadcrumb
 
     public ?array $items;
 
-    public function __construct(string $title, string $for)
+    final public function __construct(string $title, string $for)
     {
         $this->title = $title;
         $this->for = $for;
@@ -42,7 +42,7 @@ class BreadcrumbItem
 
     public string $route;
 
-    public function __construct(string $label, string $route)
+    final public function __construct(string $label, string $route)
     {
         $this->label = $label;
         $this->route = $route;

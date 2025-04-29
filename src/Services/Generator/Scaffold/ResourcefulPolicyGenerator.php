@@ -2,7 +2,7 @@
 
 namespace Pratiksh\Imperium\Services\Generator\Scaffold;
 
-use Pratiksh\Imperium\Contracts\Imperium\Generator\GeneratorInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\GeneratorInterface;
 use Pratiksh\Imperium\Services\Generator\Generator;
 
 class ResourcefulPolicyGenerator extends Generator implements GeneratorInterface
@@ -33,6 +33,6 @@ class ResourcefulPolicyGenerator extends Generator implements GeneratorInterface
             $this->getStub('ResourcefulPolicy'),
         );
 
-        return $this->makeFile(app_path('Policies/'.$this->name.'Policy.php'), $template);
+        return $this->makeFile(app_path('Policies/' . $this->name . 'Policy.php'), $template);
     }
 }

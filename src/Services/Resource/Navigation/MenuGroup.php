@@ -18,7 +18,7 @@ class MenuGroup
 
     public $authorize = true;
 
-    public function __construct(string $label)
+    final public function __construct(string $label)
     {
         $this->label = $label;
     }

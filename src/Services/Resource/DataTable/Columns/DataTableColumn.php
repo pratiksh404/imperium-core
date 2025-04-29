@@ -23,7 +23,7 @@ class DataTableColumn
     /**
      * Create a new column instance.
      */
-    public function __construct(string $field, ?string $label = null)
+    final public function __construct(string $field, ?string $label = null)
     {
         $this->field = $field;
         $this->label = $label ?? ucfirst($field);
@@ -82,7 +82,7 @@ class DataTableColumn
      */
     public function default(string $default)
     {
-        $this->defaultCallback = fn ($value) => $value ?? $default;
+        $this->defaultCallback = fn($value) => $value ?? $default;
 
         return $this;
     }

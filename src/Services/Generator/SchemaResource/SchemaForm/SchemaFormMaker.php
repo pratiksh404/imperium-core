@@ -33,24 +33,28 @@ class SchemaFormMaker
 
     public function generateFormCode()
     {
-        $requestRules = $this->request->rules();
-        $databaseColumns = DatabaseSchema::for(strtolower(Str::plural($this->module_name)))->columns();
+        if (method_exists($this->request, 'rules')) {
+            $requestRules = $this->request->rules();
+            $databaseColumns = DatabaseSchema::for(strtolower(Str::plural($this->module_name)))->columns();
 
-        $information_data = [];
+            $information_data = [];
 
-        foreach ($requestRules as $filed_name => $request_rule) {
-            $information_data[$filed_name] = [
-                'request_rules' => $request_rule,
-                'database_column' => $databaseColumns[$filed_name],
-            ];
+            foreach ($requestRules as $filed_name => $request_rule) {
+                $information_data[$filed_name] = [
+                    'request_rules' => $request_rule,
+                    'database_column' => $databaseColumns[$filed_name],
+                ];
+            }
+
+            $fieldCode = '';
+            foreach ($information_data as $fieldName => $info) {
+                $fieldCode .= (InputFieldMaker::for($info))->grab() . "\n";
+            }
+
+            return $fieldCode;
+        } else {
+            throw new \Exception('Request file does not have rules method');
         }
-
-        $fieldCode = '';
-        foreach ($information_data as $fieldName => $info) {
-            $fieldCode .= (InputFieldMaker::for($info))->grab() . "\n";
-        }
-
-        return $fieldCode;
     }
 
     public function generateInputField(string $fieldName, array $rules): string

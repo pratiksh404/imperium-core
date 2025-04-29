@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratiksh\Imperium\Contracts\Imperium\Generator;
+namespace Pratiksh\Imperium\Contracts\Core\Generator;
 
 interface SchemaRuleInterface
 {

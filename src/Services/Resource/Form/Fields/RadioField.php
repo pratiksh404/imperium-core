@@ -51,7 +51,7 @@ class RadioOption
 
     public $label;
 
-    public function __construct($value, $label)
+    final public function __construct($value, $label)
     {
         $this->value = $value;
         $this->label = $label;

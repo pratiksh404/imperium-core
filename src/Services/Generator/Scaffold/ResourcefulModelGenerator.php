@@ -2,7 +2,7 @@
 
 namespace Pratiksh\Imperium\Services\Generator\Scaffold;
 
-use Pratiksh\Imperium\Contracts\Imperium\Generator\GeneratorInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\GeneratorInterface;
 use Pratiksh\Imperium\Services\Generator\Generator;
 
 class ResourcefulModelGenerator extends Generator implements GeneratorInterface
@@ -29,6 +29,6 @@ class ResourcefulModelGenerator extends Generator implements GeneratorInterface
             $this->getStub('ResourcefulModel'),
         );
 
-        return $this->makeFile(app_path('Models/Admin/'.$this->name.'.php'), $template);
+        return $this->makeFile(app_path('Models/Admin/' . $this->name . '.php'), $template);
     }
 }

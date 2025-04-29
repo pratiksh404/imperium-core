@@ -6,7 +6,7 @@ class Menu
 {
     public array $items = [];
 
-    public function __construct(array $items)
+    final public function __construct(array $items)
     {
         $this->items = $items;
     }

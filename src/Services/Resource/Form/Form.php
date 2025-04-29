@@ -109,7 +109,7 @@ class Group
 
     public array $fields = [];
 
-    public function __construct(string $title)
+    final public function __construct(string $title)
     {
         $this->title = $title;
     }

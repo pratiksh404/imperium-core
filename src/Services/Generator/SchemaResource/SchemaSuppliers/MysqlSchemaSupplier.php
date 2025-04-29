@@ -3,7 +3,7 @@
 namespace Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaSuppliers;
 
 use Illuminate\Support\Facades\DB;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\SchemaSupplierInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\SchemaSupplierInterface;
 
 class MysqlSchemaSupplier implements SchemaSupplierInterface
 {
@@ -19,7 +19,7 @@ class MysqlSchemaSupplier implements SchemaSupplierInterface
         $databaseName = config('database.connections.mysql.database');
         $tableName = $this->table_name;
 
-        $tableColumns = collect(DB::select('SHOW COLUMNS FROM '.$tableName))->keyBy('Field')->toArray();
+        $tableColumns = collect(DB::select('SHOW COLUMNS FROM ' . $tableName))->keyBy('Field')->toArray();
 
         $foreignKeys = DB::select("
             SELECT k.COLUMN_NAME, k.REFERENCED_TABLE_NAME, k.REFERENCED_COLUMN_NAME
@@ -37,7 +37,7 @@ class MysqlSchemaSupplier implements SchemaSupplierInterface
             ];
         }
 
-        return $tableColumns ?? [];
+        return $tableColumns;
     }
 
     public function tableName(): string

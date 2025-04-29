@@ -3,7 +3,7 @@
 namespace Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaSuppliers;
 
 use Illuminate\Support\Facades\DB;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\SchemaSupplierInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\SchemaSupplierInterface;
 
 class SqliteSchemaSupplier implements SchemaSupplierInterface
 {

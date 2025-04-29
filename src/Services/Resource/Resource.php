@@ -4,13 +4,14 @@ namespace Pratiksh\Imperium\Services\Resource;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Pratiksh\Imperium\Facades\Imperium;
 use Pratiksh\Imperium\Services\Resource\Form\Form;
 use Pratiksh\Imperium\Services\Resource\DataTable\DataTable;
 use Pratiksh\Imperium\Services\Resource\Navigation\Navigation;
 
 abstract class Resource
 {
-    protected User $authUser;
+    protected $authUser;
 
     /**
      * The associated model for this resource.
@@ -42,7 +43,7 @@ abstract class Resource
 
     public function __construct()
     {
-        $this->authUser = User::find(Auth::user()->id);
+        $this->authUser = Imperium::user()->find(Auth::user()->id);
     }
 
     public function get()
@@ -66,7 +67,7 @@ abstract class Resource
      */
     public static function query()
     {
-        if (! isset(static::$model) || ! class_exists(static::$model)) {
+        if (class_exists(static::$model)) {
             throw new \RuntimeException('Resource model is not defined or invalid.');
         }
 

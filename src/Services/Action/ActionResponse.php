@@ -10,8 +10,10 @@ class ActionResponse
     /**
      * Standard JSON response structure
      *
-     * @param  mixed  $data
-     * @param  array|null  $errors
+     * @param  array|null  $data
+     * @param  string $message
+     * @param  int $status
+     * @return JsonResponse
      */
     public static function success(?array $data = null, string $message = 'Success', int $status = 200): JsonResponse
     {

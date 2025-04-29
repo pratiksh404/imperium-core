@@ -3,8 +3,8 @@
 namespace Pratiksh\Imperium\Services\Generator\SchemaResource;
 
 use Exception;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\SchemaRuleInterface;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\SchemaSupplierInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\SchemaRuleInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\SchemaSupplierInterface;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaRules\MysqlSchemaRule;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaRules\PgsqlSchemaRule;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaRules\SqliteSchemaRule;
@@ -22,7 +22,7 @@ class DatabaseSchema
 
     public string $table_name;
 
-    public function __construct(string $table_name)
+    final public function __construct(string $table_name)
     {
         $this->driver_name = getDatabaseDriverName();
         $this->table_name = $table_name;
@@ -48,39 +48,30 @@ class DatabaseSchema
     private function arbiter(): SchemaRuleInterface
     {
         $database_driver_name = getDatabaseDriverName();
-
-        switch ($database_driver_name) {
-            case 'mysql':
-                return new MysqlSchemaRule($this->table_name);
-                break;
-            case 'pgsql':
-                return new PgsqlSchemaRule($this->table_name);
-                break;
-            case 'sqlite':
-                return new SqliteSchemaRule($this->table_name);
-                break;
-            default:
-                throw new Exception('Unsupported Database');
-                break;
+        // Check if the database driver name is supported
+        if ($database_driver_name == 'mysql') {
+            return new MysqlSchemaRule($this->table_name);
+        } elseif ($database_driver_name == 'pgsql') {
+            return new PgsqlSchemaRule($this->table_name);
+        } elseif ($database_driver_name == 'sqlite') {
+            return new SqliteSchemaRule($this->table_name);
+        } else {
+            throw new Exception('Unsupported Database');
         }
     }
 
     private function supplier(): SchemaSupplierInterface
     {
         $database_driver_name = getDatabaseDriverName();
-
-        switch ($database_driver_name) {
-            case 'mysql':
-                return new MysqlSchemaSupplier($this->table_name);
-                break;
-            case 'pgsql':
-                return new PgsqlSchemaSupplier($this->table_name);
-                break;
-            case 'sqlite':
-                return new SqliteSchemaSupplier($this->table_name);
-                break;
-            default:
-                throw new Exception('Unsupported Database');
+        // Check if the database driver name is supported
+        if ($database_driver_name == 'mysql') {
+            return new MysqlSchemaSupplier($this->table_name);
+        } elseif ($database_driver_name == 'pgsql') {
+            return new PgsqlSchemaSupplier($this->table_name);
+        } elseif ($database_driver_name == 'sqlite') {
+            return new SqliteSchemaSupplier($this->table_name);
+        } else {
+            throw new Exception('Unsupported Database');
         }
     }
 }

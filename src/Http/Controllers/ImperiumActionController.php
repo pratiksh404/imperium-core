@@ -7,7 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Artisan;
 use Pratiksh\Imperium\Http\Controllers\Controller;
 use Pratiksh\Imperium\Services\Action\ActionResponse;
-use Pratiksh\Imperium\Contracts\Imperium\HasActionInterface;
+use Pratiksh\Imperium\Contracts\Core\HasActionInterface;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaDatabase\SchemaMigrationGenerator;
 
 class ImperiumActionController extends Controller implements HasActionInterface

@@ -3,7 +3,7 @@
 namespace Pratiksh\Imperium\Services\Generator\Scaffold;
 
 use Illuminate\Support\Str;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\GeneratorInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\GeneratorInterface;
 use Pratiksh\Imperium\Services\Generator\Generator;
 
 class ResourcefulVueComponentGenerator extends Generator implements GeneratorInterface
@@ -35,7 +35,7 @@ class ResourcefulVueComponentGenerator extends Generator implements GeneratorInt
             $this->getStub('Index'),
         );
 
-        return $this->makeFile(resource_path('js/Pages/Admin/Modules/'.$this->name.'/Index.vue'), $template);
+        return $this->makeFile(resource_path('js/Pages/Admin/Modules/' . $this->name . '/Index.vue'), $template);
     }
 
     public function generateModuleForm()
@@ -50,6 +50,6 @@ class ResourcefulVueComponentGenerator extends Generator implements GeneratorInt
             $this->getStub('Form'),
         );
 
-        return $this->makeFile(resource_path('js/Components/Form/'.$this->name.'/Form.vue'), $template);
+        return $this->makeFile(resource_path('js/Components/Form/' . $this->name . '/Form.vue'), $template);
     }
 }

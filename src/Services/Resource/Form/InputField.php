@@ -5,6 +5,7 @@ namespace Pratiksh\Imperium\Services\Resource\Form;
 use Closure;
 use Illuminate\Http\Request;
 
+/** @phpstan-consistent-constructor */
 abstract class InputField
 {
     // Type

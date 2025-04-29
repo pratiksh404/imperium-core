@@ -3,7 +3,7 @@
 namespace Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaRules;
 
 use Illuminate\Support\Str;
-use Pratiksh\Imperium\Contracts\Imperium\Generator\SchemaRuleInterface;
+use Pratiksh\Imperium\Contracts\Core\Generator\SchemaRuleInterface;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaSuppliers\PgsqlSchemaSupplier;
 use stdClass;
 
@@ -51,7 +51,7 @@ class PgsqlSchemaRule extends PgsqlSchemaSupplier implements SchemaRuleInterface
         $columnRules[] = $column->is_nullable === 'YES' ? 'nullable' : 'required';
 
         if (! empty($column->Foreign)) {
-            $columnRules[] = 'exists:'.implode(',', $column->Foreign);
+            $columnRules[] = 'exists:' . implode(',', $column->Foreign);
 
             return $columnRules;
         }
@@ -64,25 +64,25 @@ class PgsqlSchemaRule extends PgsqlSchemaSupplier implements SchemaRuleInterface
                 break;
             case $type->contains('char'):
                 $columnRules[] = 'string';
-                $columnRules[] = 'min:'.config('schema-rules.string_min_length');
-                $columnRules[] = 'max:'.$column->character_maximum_length;
+                $columnRules[] = 'min:' . config('schema-rules.string_min_length');
+                $columnRules[] = 'max:' . $column->character_maximum_length;
 
                 break;
             case $type == 'text':
                 $columnRules[] = 'string';
-                $columnRules[] = 'min:'.config('schema-rules.string_min_length');
+                $columnRules[] = 'min:' . config('schema-rules.string_min_length');
 
                 break;
             case $type->contains('int'):
                 $columnRules[] = 'integer';
-                $columnRules[] = 'min:'.self::$integerTypes[$type->__toString()][0];
-                $columnRules[] = 'max:'.self::$integerTypes[$type->__toString()][1];
+                $columnRules[] = 'min:' . self::$integerTypes[$type->__toString()][0];
+                $columnRules[] = 'max:' . self::$integerTypes[$type->__toString()][1];
 
                 break;
             case $type->contains('double') ||
-            $type->contains('decimal') ||
-            $type->contains('numeric') ||
-            $type->contains('real'):
+                $type->contains('decimal') ||
+                $type->contains('numeric') ||
+                $type->contains('real'):
                 $columnRules[] = 'numeric';
 
                 break;

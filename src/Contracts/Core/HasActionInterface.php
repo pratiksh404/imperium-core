@@ -1,6 +1,6 @@
 <?php
 
-namespace Pratiksh\Imperium\Contracts\Imperium;
+namespace Pratiksh\Imperium\Contracts\Core;
 
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Http\Request;

@@ -26,14 +26,9 @@ abstract class FieldMaker
         $this->field_name = $this->database_column['Field'];
     }
 
-    public static function for(array $field_info): self
-    {
-        return new self($field_info);
-    }
-
     protected function append(string $appendable): string
     {
-        $this->input_field .= ('->'.trim($appendable));
+        $this->input_field .= ('->' . trim($appendable));
 
         return $this->input_field;
     }
@@ -42,7 +37,7 @@ abstract class FieldMaker
     {
         $default = $this->field_info['Default'];
         if (! is_null($default)) {
-            $this->append('->default('.(is_numeric($default) ? $default : '"'.$default.'"').')');
+            $this->append('->default(' . (is_numeric($default) ? $default : '"' . $default . '"') . ')');
         }
     }
 
