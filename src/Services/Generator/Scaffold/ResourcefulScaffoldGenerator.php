@@ -2,17 +2,17 @@
 
 namespace Pratiksh\Imperium\Services\Generator\Scaffold;
 
-use App\Models\Role;
-use App\Models\Permission;
+
 use Illuminate\Support\Str;
-use function Laravel\Prompts\info;
 use function Laravel\Prompts\confirm;
 use Illuminate\Support\Facades\Artisan;
 
 use Pratiksh\Imperium\Facades\Imperium;
 use function Laravel\Prompts\multiselect;
+
 use Pratiksh\Imperium\Services\Generator\Generator;
 use Pratiksh\Imperium\Contracts\Core\Generator\GeneratorInterface;
+
 
 class ResourcefulScaffoldGenerator extends Generator implements GeneratorInterface
 {

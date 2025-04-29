@@ -2,10 +2,10 @@
 
 namespace Pratiksh\Imperium\Repositories;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Pratiksh\Imperium\Contracts\ResourcefulInterface;
 
 class ResourcefulRepository implements ResourcefulInterface
@@ -48,7 +48,7 @@ class ResourcefulRepository implements ResourcefulInterface
 
         return [
             Str::plural($this->name) => $model,
-            'trashed_' . Str::plural($this->name) => $trashed_model,
+            'trashed_'.Str::plural($this->name) => $trashed_model,
         ];
     }
 

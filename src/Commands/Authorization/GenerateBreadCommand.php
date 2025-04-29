@@ -3,18 +3,16 @@
 namespace Pratiksh\Imperium\Commands\Authorization;
 
 use App\Models\Role;
-use App\Models\User;
-use App\Models\Permission;
 use Illuminate\Console\Command;
-
-use function Laravel\Prompts\info;
-use function Laravel\Prompts\note;
-use function Laravel\Prompts\text;
-use function Laravel\Prompts\error;
-use function Laravel\Prompts\select;
-use function Laravel\Prompts\confirm;
 use Pratiksh\Imperium\Facades\Imperium;
+
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\error;
+use function Laravel\Prompts\info;
 use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\note;
+use function Laravel\Prompts\select;
+use function Laravel\Prompts\text;
 
 class GenerateBreadCommand extends Command
 {
@@ -63,7 +61,7 @@ class GenerateBreadCommand extends Command
         // Generate BREAD
         $module_with_no_bread = $role->modules_with_no_bread;
         if (count($module_with_no_bread ?? []) === 0) {
-            info('Seems like role ' . $role->name . ' already has BREAD for all modules.');
+            info('Seems like role '.$role->name.' already has BREAD for all modules.');
 
             return;
         }
@@ -79,7 +77,7 @@ class GenerateBreadCommand extends Command
                 error('Model not found.');
             }
 
-            info('Select BREAD for module ' . $module_name . ' and role ' . $role->name);
+            info('Select BREAD for module '.$module_name.' and role '.$role->name);
             $active_breads = multiselect(
                 label: 'Authorized BREAD',
                 options: [
@@ -94,7 +92,7 @@ class GenerateBreadCommand extends Command
 
             Imperium::permission()->generateBREADForModel($model, $role, $active_breads);
 
-            info('BREAD generated successfully for role ' . $role->name . ' and module ' . $module_name);
+            info('BREAD generated successfully for role '.$role->name.' and module '.$module_name);
         }
     }
 
@@ -119,7 +117,7 @@ class GenerateBreadCommand extends Command
             // Assigning created role for users who does not have any role
             Imperium::user()->whereNull('role_id')->update(['role_id' => $createdRole->id]);
 
-            note('Role created successfully: ' . $createdRole->name);
+            note('Role created successfully: '.$createdRole->name);
         }
     }
 }

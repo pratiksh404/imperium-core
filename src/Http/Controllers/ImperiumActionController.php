@@ -2,8 +2,8 @@
 
 namespace Pratiksh\Imperium\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Pratiksh\Imperium\Http\Controllers\Controller;
 use Pratiksh\Imperium\Services\Action\ActionResponse;

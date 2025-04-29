@@ -5,8 +5,8 @@ namespace Pratiksh\Imperium\Services\Resource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Pratiksh\Imperium\Facades\Imperium;
-use Pratiksh\Imperium\Services\Resource\Form\Form;
 use Pratiksh\Imperium\Services\Resource\DataTable\DataTable;
+use Pratiksh\Imperium\Services\Resource\Form\Form;
 use Pratiksh\Imperium\Services\Resource\Navigation\Navigation;
 
 abstract class Resource

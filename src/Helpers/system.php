@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Pratiksh\Imperium\Facades\Imperium;
 
 if (! function_exists('setting')) {
@@ -34,7 +34,7 @@ if (! function_exists('resources')) {
         // $resources = getFilesWithPaths(base_path(str_replace('\\', '/', $namespace)));
         $data = [];
         foreach ($resources as $resource => $resource_file) {
-            $resource_class = $namespace . '\\' . (trim(Str::ucfirst($resource)));
+            $resource_class = $namespace.'\\'.(trim(Str::ucfirst($resource)));
             $resource_data = (new ($resource_class))->get();
             $data[$resource_data['name']] = $resource_data;
         }
@@ -48,7 +48,7 @@ if (! function_exists('getResource')) {
     {
         $namespace = 'App\\Imperium\\Resource';
 
-        return (new ($namespace . '\\' . (trim(Str::ucfirst($name)) . 'Resource')))->get();
+        return (new ($namespace.'\\'.(trim(Str::ucfirst($name)).'Resource')))->get();
     }
 }
 
@@ -69,9 +69,9 @@ if (! function_exists('getFilesWithPaths')) {
         foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === $extension) {
                 // Get the relative path from the base path
-                $relativePath = str_replace($basePath . DIRECTORY_SEPARATOR, '', $file->getPathname());
+                $relativePath = str_replace($basePath.DIRECTORY_SEPARATOR, '', $file->getPathname());
 
-                $filesWithPaths[basename($file->getFilename(), '.' . $extension)] = $basePath . DIRECTORY_SEPARATOR . $relativePath;
+                $filesWithPaths[basename($file->getFilename(), '.'.$extension)] = $basePath.DIRECTORY_SEPARATOR.$relativePath;
             }
         }
 
@@ -87,7 +87,7 @@ function getFilesWithNameSpace(string $basePath, string $extension = 'php'): arr
     foreach ($filesWithPaths as $className => $filePath) {
         $namespace = extractNamespace($filePath);
         if ($namespace) {
-            $filesWithNamespace[$className] = $namespace . '\\' . $className;
+            $filesWithNamespace[$className] = $namespace.'\\'.$className;
         }
     }
 
@@ -119,17 +119,17 @@ if (! function_exists('getAllModels')) {
 
         foreach ($iterator as $file) {
             if ($file->isFile() && $file->getExtension() === 'php') {
-                $relativePath = str_replace($basePath . DIRECTORY_SEPARATOR, '', $file->getPathname());
+                $relativePath = str_replace($basePath.DIRECTORY_SEPARATOR, '', $file->getPathname());
                 $directory = dirname($relativePath);
                 $namespace = 'App\\Models';
 
                 // Add subdirectory to namespace if not in the root directory
                 if ($directory !== '.') {
-                    $namespace .= '\\' . str_replace('/', '\\', $directory);
+                    $namespace .= '\\'.str_replace('/', '\\', $directory);
                 }
 
                 $className = basename($file->getFilename(), '.php');
-                $models[$className] = $namespace . '\\' . $className;
+                $models[$className] = $namespace.'\\'.$className;
             }
         }
 
@@ -175,7 +175,7 @@ if (! function_exists('getMigrationFileForTable')) {
         // Loop through migration files and check if any match the table name
         foreach ($migrationFiles as $migrationFile) {
             // Check if the migration file contains the table name
-            if (Str::contains($migrationFile->getFilename(), 'create_' . $tableName . '_table')) {
+            if (Str::contains($migrationFile->getFilename(), 'create_'.$tableName.'_table')) {
                 return $migrationFile;
             }
         }
