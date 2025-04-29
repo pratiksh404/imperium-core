@@ -83,7 +83,7 @@ class MysqlSchemaRule implements SchemaRuleInterface
         $relationRules[] = $column->Null === 'YES' ? 'nullable' : 'required';
 
         if (! empty($column->Foreign)) {
-            $relationRules[] = 'exists:' . implode(',', $column->Foreign);
+            $relationRules[] = 'exists:'.implode(',', $column->Foreign);
         }
 
         return $relationRules;
@@ -94,7 +94,7 @@ class MysqlSchemaRule implements SchemaRuleInterface
         $uniqueRules = [];
         $field = $column->Field;
         if (Schema::hasIndex($this->table_name, [$field], 'unique')) {
-            $uniqueRules[] = 'unique:' . $this->table_name . ',' . $field;
+            $uniqueRules[] = 'unique:'.$this->table_name.','.$field;
         }
 
         return $uniqueRules;
@@ -108,7 +108,7 @@ class MysqlSchemaRule implements SchemaRuleInterface
         $rule_type = 'default';
 
         if ($type->contains('char')) {
-            $defined_rules[] = 'max:' . filter_var($type, FILTER_SANITIZE_NUMBER_INT);
+            $defined_rules[] = 'max:'.filter_var($type, FILTER_SANITIZE_NUMBER_INT);
             $rule_type = 'char';
         } elseif ($type->contains('int')) {
             $is_unsigned = $type->contains('unsigned');
@@ -139,7 +139,7 @@ class MysqlSchemaRule implements SchemaRuleInterface
     {
         preg_match_all("/'([^']*)'/", $type, $matches);
 
-        return 'in:' . implode(',', $matches[1]);
+        return 'in:'.implode(',', $matches[1]);
     }
 
     protected function determineRuleType($type): string
@@ -167,7 +167,7 @@ class MysqlSchemaRule implements SchemaRuleInterface
 
     public function getRulesForColumn(string $column_type, array $rules = [], bool $is_unsigned = false): array
     {
-        $default_rules = config('imperium.schema.rules.' . trim($column_type) . '.default', []);
+        $default_rules = config('imperium.schema.rules.'.trim($column_type).'.default', []);
         // Merge the default rules and provided rules
         $merged_rules = array_merge($default_rules, $rules);
 
@@ -191,24 +191,24 @@ class MysqlSchemaRule implements SchemaRuleInterface
             if ($minValue !== null) {
                 if ($minValue < $minMaxValues['min']) {
                     // Replace invalid min value with default
-                    $merged_rules = array_filter($merged_rules, fn($rule) => strpos($rule, 'min:') !== 0);
-                    $merged_rules[] = 'min:' . $minMaxValues['min'];
+                    $merged_rules = array_filter($merged_rules, fn ($rule) => strpos($rule, 'min:') !== 0);
+                    $merged_rules[] = 'min:'.$minMaxValues['min'];
                 }
             } else {
                 // Add default min if missing
-                $merged_rules[] = 'min:' . $minMaxValues['min'];
+                $merged_rules[] = 'min:'.$minMaxValues['min'];
             }
 
             // Validate and replace 'max' rule
             if ($maxValue !== null) {
                 if ($maxValue > $minMaxValues['max']) {
                     // Replace invalid max value with default
-                    $merged_rules = array_filter($merged_rules, fn($rule) => strpos($rule, 'max:') !== 0);
-                    $merged_rules[] = 'max:' . $minMaxValues['max'];
+                    $merged_rules = array_filter($merged_rules, fn ($rule) => strpos($rule, 'max:') !== 0);
+                    $merged_rules[] = 'max:'.$minMaxValues['max'];
                 }
             } else {
                 // Add default max if missing
-                $merged_rules[] = 'max:' . $minMaxValues['max'];
+                $merged_rules[] = 'max:'.$minMaxValues['max'];
             }
         }
 

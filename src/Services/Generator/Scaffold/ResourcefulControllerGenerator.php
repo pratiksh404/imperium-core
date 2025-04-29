@@ -36,6 +36,6 @@ class ResourcefulControllerGenerator extends Generator implements GeneratorInter
             $this->getStub('ResourcefulController'),
         );
 
-        return $this->makeFile(app_path('Http/Controllers/Admin/Resourceful/' . $this->name . 'Controller.php'), $template);
+        return $this->makeFile(app_path('Http/Controllers/Admin/Resourceful/'.$this->name.'Controller.php'), $template);
     }
 }

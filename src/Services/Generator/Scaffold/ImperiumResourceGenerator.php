@@ -36,14 +36,14 @@ class ImperiumResourceGenerator extends Generator implements GeneratorInterface
         // Adding Resource to menu
         $this->addToMenu();
 
-        return $this->makeFile(app_path('Imperium/Resource/' . $this->name . 'Resource.php'), $template);
+        return $this->makeFile(app_path('Imperium/Resource/'.$this->name.'Resource.php'), $template);
     }
 
     private function addToMenu()
     {
         $menuPath = app_path('Imperium/Application.php');
-        $resourcePath = "\Pratiksh\Imperium\Resource\\" . $this->name . 'Resource::class';
-        $newLine = 'MenuResourceItem::make(' . $resourcePath . '),';
+        $resourcePath = "\Pratiksh\Imperium\Resource\\".$this->name.'Resource::class';
+        $newLine = 'MenuResourceItem::make('.$resourcePath.'),';
 
         if (file_exists($menuPath)) {
             // Read the existing file content
@@ -57,7 +57,7 @@ class ImperiumResourceGenerator extends Generator implements GeneratorInterface
                 if (strpos($matches[1], trim($newLine)) === false) {
                     // Insert the new line before the closing `]`
                     $arrayContent = rtrim($matches[1]);
-                    $modifiedArrayContent = $arrayContent . "\n                " . $newLine;
+                    $modifiedArrayContent = $arrayContent."\n                ".$newLine;
 
                     // Replace the matched return block with the updated block
                     $replacement = preg_replace(

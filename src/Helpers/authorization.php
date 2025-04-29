@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Auth\Authenticatable;
 use Pratiksh\Imperium\Facades\Imperium;
 
 if (! function_exists('ifUserCanForAllModules')) {

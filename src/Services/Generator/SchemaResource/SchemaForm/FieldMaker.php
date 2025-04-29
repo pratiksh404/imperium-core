@@ -28,7 +28,7 @@ abstract class FieldMaker
 
     protected function append(string $appendable): string
     {
-        $this->input_field .= ('->' . trim($appendable));
+        $this->input_field .= ('->'.trim($appendable));
 
         return $this->input_field;
     }
@@ -37,7 +37,7 @@ abstract class FieldMaker
     {
         $default = $this->field_info['Default'];
         if (! is_null($default)) {
-            $this->append('->default(' . (is_numeric($default) ? $default : '"' . $default . '"') . ')');
+            $this->append('->default('.(is_numeric($default) ? $default : '"'.$default.'"').')');
         }
     }
 

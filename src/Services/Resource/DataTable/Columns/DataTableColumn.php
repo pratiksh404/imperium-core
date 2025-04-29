@@ -82,7 +82,7 @@ class DataTableColumn
      */
     public function default(string $default)
     {
-        $this->defaultCallback = fn($value) => $value ?? $default;
+        $this->defaultCallback = fn ($value) => $value ?? $default;
 
         return $this;
     }

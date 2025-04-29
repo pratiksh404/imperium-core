@@ -33,6 +33,6 @@ class ResourcefulPolicyGenerator extends Generator implements GeneratorInterface
             $this->getStub('ResourcefulPolicy'),
         );
 
-        return $this->makeFile(app_path('Policies/' . $this->name . 'Policy.php'), $template);
+        return $this->makeFile(app_path('Policies/'.$this->name.'Policy.php'), $template);
     }
 }

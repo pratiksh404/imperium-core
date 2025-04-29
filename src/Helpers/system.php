@@ -7,7 +7,7 @@ use Pratiksh\Imperium\Facades\Imperium;
 if (! function_exists('setting')) {
     function setting($name)
     {
-        return config('imperium.' . trim($name), null);
+        return config('imperium.'.trim($name), null);
     }
 }
 

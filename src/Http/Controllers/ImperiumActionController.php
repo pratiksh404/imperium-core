@@ -5,9 +5,8 @@ namespace Pratiksh\Imperium\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
-use Pratiksh\Imperium\Http\Controllers\Controller;
-use Pratiksh\Imperium\Services\Action\ActionResponse;
 use Pratiksh\Imperium\Contracts\Core\HasActionInterface;
+use Pratiksh\Imperium\Services\Action\ActionResponse;
 use Pratiksh\Imperium\Services\Generator\SchemaResource\SchemaDatabase\SchemaMigrationGenerator;
 
 class ImperiumActionController extends Controller implements HasActionInterface
@@ -24,10 +23,10 @@ class ImperiumActionController extends Controller implements HasActionInterface
                         if (method_exists($this, $action_name)) {
                             $responses[] = $this->$action_name($batchAction);
                         } else {
-                            $responses[] = ActionResponse::error('#' . ($index + 1) . ' Batch action not found');
+                            $responses[] = ActionResponse::error('#'.($index + 1).' Batch action not found');
                         }
                     } else {
-                        $responses[] = ActionResponse::error('#' . ($index + 1) . ' Batch action not provided');
+                        $responses[] = ActionResponse::error('#'.($index + 1).' Batch action not provided');
                     }
                 }
             }
@@ -46,7 +45,7 @@ class ImperiumActionController extends Controller implements HasActionInterface
                 if (method_exists($this, $action_name)) {
                     return $this->$action_name($request);
                 } else {
-                    return ActionResponse::error($action_name . ' method not found in ' . get_class($this));
+                    return ActionResponse::error($action_name.' method not found in '.get_class($this));
                 }
             } else {
                 return ActionResponse::error('Action not provided');

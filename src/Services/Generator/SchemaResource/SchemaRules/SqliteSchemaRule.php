@@ -43,7 +43,7 @@ class SqliteSchemaRule extends SqliteSchemaSupplier implements SchemaRuleInterfa
         $columnRules[] = $column->notnull ? 'required' : 'nullable';
 
         if (! empty($column->Foreign)) {
-            $columnRules[] = 'exists:' . implode(',', $column->Foreign);
+            $columnRules[] = 'exists:'.implode(',', $column->Foreign);
 
             return $columnRules;
         }
@@ -56,7 +56,7 @@ class SqliteSchemaRule extends SqliteSchemaSupplier implements SchemaRuleInterfa
                 break;
             case $type == 'varchar' || $type == 'text':
                 $columnRules[] = 'string';
-                $columnRules[] = 'min:' . config('schema-rules.string_min_length');
+                $columnRules[] = 'min:'.config('schema-rules.string_min_length');
 
                 break;
             case $type == 'integer':

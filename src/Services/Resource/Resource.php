@@ -2,7 +2,6 @@
 
 namespace Pratiksh\Imperium\Services\Resource;
 
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Pratiksh\Imperium\Facades\Imperium;
 use Pratiksh\Imperium\Services\Resource\DataTable\DataTable;

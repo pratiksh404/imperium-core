@@ -35,7 +35,7 @@ class ResourcefulRepositoryGenerator extends Generator implements GeneratorInter
             $this->getStub('ResourcefulRepository'),
         );
 
-        return $this->makeFile(app_path('Repositories/' . $this->name . 'Repository.php'), $template);
+        return $this->makeFile(app_path('Repositories/'.$this->name.'Repository.php'), $template);
     }
 
     public function generateInterface()
@@ -50,6 +50,6 @@ class ResourcefulRepositoryGenerator extends Generator implements GeneratorInter
             $this->getStub('ResourcefulRepositoryInterface'),
         );
 
-        return $this->makeFile(app_path('Contracts/' . $this->name . 'RepositoryInterface.php'), $template);
+        return $this->makeFile(app_path('Contracts/'.$this->name.'RepositoryInterface.php'), $template);
     }
 }
