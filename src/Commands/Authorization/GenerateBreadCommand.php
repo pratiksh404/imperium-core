@@ -2,7 +2,6 @@
 
 namespace Pratiksh\Imperium\Commands\Authorization;
 
-use App\Models\Role;
 use Illuminate\Console\Command;
 use Pratiksh\Imperium\Facades\Imperium;
 
@@ -61,7 +60,7 @@ class GenerateBreadCommand extends Command
         // Generate BREAD
         $module_with_no_bread = $role->modules_with_no_bread;
         if (count($module_with_no_bread ?? []) === 0) {
-            info('Seems like role '.$role->name.' already has BREAD for all modules.');
+            info('Seems like role ' . $role->name . ' already has BREAD for all modules.');
 
             return;
         }
@@ -70,14 +69,13 @@ class GenerateBreadCommand extends Command
             label: 'Select module to generate BREAD for',
             options: array_keys($module_with_no_bread)
         );
-
         foreach ($module_names as $module_name) {
             $model = getModelHavingName($module_name);
             if (! $model) {
                 error('Model not found.');
             }
 
-            info('Select BREAD for module '.$module_name.' and role '.$role->name);
+            info('Select BREAD for module ' . $module_name . ' and role ' . $role->name);
             $active_breads = multiselect(
                 label: 'Authorized BREAD',
                 options: [
@@ -92,7 +90,7 @@ class GenerateBreadCommand extends Command
 
             Imperium::permission()->generateBREADForModel($model, $role, $active_breads);
 
-            info('BREAD generated successfully for role '.$role->name.' and module '.$module_name);
+            info('BREAD generated successfully for role ' . $role->name . ' and module ' . $module_name);
         }
     }
 
@@ -117,7 +115,7 @@ class GenerateBreadCommand extends Command
             // Assigning created role for users who does not have any role
             Imperium::user()->whereNull('role_id')->update(['role_id' => $createdRole->id]);
 
-            note('Role created successfully: '.$createdRole->name);
+            note('Role created successfully: ' . $createdRole->name);
         }
     }
 }

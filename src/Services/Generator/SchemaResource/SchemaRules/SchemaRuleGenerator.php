@@ -19,14 +19,23 @@ class SchemaRuleGenerator extends Generator implements GeneratorInterface
         $rules = DatabaseSchema::for($tableName)->rules();
 
         // Convert array to PHP code with correct syntax
-        $moduleRules = preg_replace(
-            ["/^array \(/", "/\)$/", "/ => \n\s+array \(/", "/\d+ => /", "/\),/"],
-            ['[', ']', ' => [', '', '],'],
-            var_export($rules, true)
-        );
+        // Convert the rules array into a properly formatted PHP array string
+        $formatValue = function ($v) use (&$formatValue) {
+            if (is_array($v)) {
+                return '[' . implode(', ', array_map($formatValue, $v)) . ']';
+            }
+            if (is_string($v)) {
+                return "'" . addslashes($v) . "'";
+            }
+            if (is_bool($v)) {
+                return $v ? 'true' : 'false';
+            }
+            return $v;
+        };
 
-        // Convert single-line arrays into one-liners
-        $moduleRules = preg_replace("/\[\n\s+([^]]+)\n\s+\]/", '[$1]', $moduleRules);
+        $moduleRules = '[' . implode(",\n", array_map(function ($key, $value) use ($formatValue) {
+            return "'" . addslashes($key) . "' => " . $formatValue($value);
+        }, array_keys($rules), $rules)) . ']';
 
         $template = str_replace(
             [
@@ -40,6 +49,6 @@ class SchemaRuleGenerator extends Generator implements GeneratorInterface
             $this->getStub('ResourcefulRequest'),
         );
 
-        return $this->makeFile(app_path('Http/Requests/'.$this->name.'Request.php'), $template);
+        return $this->makeFile(app_path('Http/Requests/' . $this->name . 'Request.php'), $template);
     }
 }

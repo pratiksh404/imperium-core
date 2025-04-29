@@ -48,7 +48,7 @@ class ResourcefulRepository implements ResourcefulInterface
 
         return [
             Str::plural($this->name) => $model,
-            'trashed_'.Str::plural($this->name) => $trashed_model,
+            'trashed_' . Str::plural($this->name) => $trashed_model,
         ];
     }
 

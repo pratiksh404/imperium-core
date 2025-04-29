@@ -4,6 +4,7 @@ namespace Pratiksh\Imperium\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Pratiksh\Imperium\Http\Controllers\Controller;
 
 class ModuleController extends Controller
 {
@@ -65,11 +66,11 @@ class ModuleController extends Controller
     {
         try {
             // Convert model name to fully qualified class name
-            $modelClass = 'App\\Models\\'.ucfirst($model);
+            $modelClass = 'App\\Models\\' . ucfirst($model);
 
             // Check if the model exists
             if (! class_exists($modelClass)) {
-                $modelClass = 'App\\Models\\Admin\\'.ucfirst($model);
+                $modelClass = 'App\\Models\\Admin\\' . ucfirst($model);
 
                 if (! class_exists($modelClass)) {
                     return redirect()->back()->with([

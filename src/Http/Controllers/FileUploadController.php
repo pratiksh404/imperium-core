@@ -3,6 +3,7 @@
 namespace Pratiksh\Imperium\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Pratiksh\Imperium\Http\Controllers\Controller;
 
 class FileUploadController extends Controller
 {
@@ -41,8 +42,8 @@ class FileUploadController extends Controller
         }
 
         // If the file exists, delete it
-        if (file_exists(public_path('storage/'.$file))) {
-            unlink(public_path('storage/'.$file));
+        if (file_exists(public_path('storage/' . $file))) {
+            unlink(public_path('storage/' . $file));
         }
     }
 }
