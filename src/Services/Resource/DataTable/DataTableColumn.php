@@ -1,10 +1,10 @@
 <?php
 
-namespace Pratiksh\Imperium\Services\Resource\DataTable\Columns;
+namespace Pratiksh\Imperium\Services\Resource\DataTable;
 
 use Closure;
 
-class DataTableColumn
+abstract class DataTableColumn
 {
     public string $field;
 
@@ -23,21 +23,12 @@ class DataTableColumn
     /**
      * Create a new column instance.
      */
-    final public function __construct(string $field, ?string $label = null)
+    public function __construct(string $field, ?string $label = null)
     {
         $this->field = $field;
         $this->label = $label ?? ucfirst($field);
     }
 
-    /**
-     * Make a new column instance.
-     *
-     * @return static
-     */
-    public static function make(string $field, ?string $label = null)
-    {
-        return new static($field, $label);
-    }
 
     /**
      * Mark the column as sortable.
@@ -82,7 +73,7 @@ class DataTableColumn
      */
     public function default(string $default)
     {
-        $this->defaultCallback = fn ($value) => $value ?? $default;
+        $this->defaultCallback = fn($value) => $value ?? $default;
 
         return $this;
     }

@@ -3,12 +3,23 @@
 namespace Pratiksh\Imperium\Services\Resource\DataTable\Columns;
 
 use Illuminate\Support\Str;
+use Pratiksh\Imperium\Services\Resource\DataTable\DataTableColumn;
 
 class TextColumn extends DataTableColumn
 {
     protected ?int $maxLength = null;
 
     protected bool $allowNewLines = true;
+
+    public function __construct(string $field, ?string $label = null)
+    {
+        parent::__construct($field, $label);
+    }
+
+    public static function make(string $field, ?string $label = null): static
+    {
+        return new static($field, $label);
+    }
 
     /**
      * Limit the text to a specific maximum length.

@@ -4,6 +4,8 @@ namespace Pratiksh\Imperium\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ModuleController extends Controller
 {
@@ -23,10 +25,9 @@ class ModuleController extends Controller
             $record->trashed() ? $record->forceDelete() : $record->delete();
         });
 
-        return redirect()->back()->with([
-            'success' => $deleted
-                ? "{$deleted} records deleted successfully"
-                : 'No records deleted',
+        return response()->json([
+            'success' => true,
+            'message' => 'Records deleted successfully',
         ]);
     }
 
@@ -43,8 +44,9 @@ class ModuleController extends Controller
         // Reorder the records
         $modelClass::reorder($validated['ids']);
 
-        return redirect()->back()->with([
-            'success' => 'Records reordered successfully',
+        return response()->json([
+            'success' => true,
+            'message' => 'Records reordered successfully',
         ]);
     }
 
@@ -56,40 +58,35 @@ class ModuleController extends Controller
         // Restore the record
         $modelClass::withTrashed()->find($id)->restore();
 
-        return redirect()->back()->with([
-            'success' => 'Record restored successfully',
+        return response()->json([
+            'success' => true,
+            'message' => 'Record restored successfully',
         ]);
     }
 
-    private function getModelClass($model)
+    private function getModelClass(string $model): string
     {
-        try {
-            // Convert model name to fully qualified class name
-            $modelClass = 'App\\Models\\'.ucfirst($model);
+        $possibleNamespaces = [
+            'App\\Models\\',
+            'App\\Models\\Admin\\',
+        ];
 
-            // Check if the model exists
-            if (! class_exists($modelClass)) {
-                $modelClass = 'App\\Models\\Admin\\'.ucfirst($model);
+        $studlyName = Str::studly($model);
 
-                if (! class_exists($modelClass)) {
-                    return redirect()->back()->with([
-                        'error' => 'Model not found',
-                    ]);
+        foreach ($possibleNamespaces as $namespace) {
+            $class = $namespace . $studlyName;
+
+            if (class_exists($class)) {
+                $instance = new $class;
+
+                if (! Schema::hasTable($instance->getTable())) {
+                    throw new \RuntimeException("Table not found for model: {$class}");
                 }
-            }
 
-            // Check if the model has a corresponding table
-            if (! Schema::hasTable((new $modelClass)->getTable())) {
-                return redirect()->back()->with([
-                    'error' => 'Invalid model table',
-                ]);
+                return $class;
             }
-
-            return $modelClass;
-        } catch (\Throwable $th) {
-            return redirect()->back()->with([
-                'error' => $th->getMessage(),
-            ]);
         }
+
+        throw new ModelNotFoundException("Model not found: {$model}");
     }
 }

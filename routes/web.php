@@ -17,7 +17,7 @@ Route::prefix('admin')->middleware(['auth', 'verified', HandlePrecognitiveReques
     Route::delete('/bulk-delete/{model}', [ModuleController::class, 'bulkDelete'])
         ->name('bulk-delete');
 
-    Route::patch('/reorder/{model}', [ModuleController::class, 'reorder'])
+    Route::post('/reorder/{model}', [ModuleController::class, 'reorder'])
         ->name('reorder');
 
     Route::patch('/restore/{model}/{id}', [ModuleController::class, 'restore'])
