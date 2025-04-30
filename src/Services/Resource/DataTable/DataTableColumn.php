@@ -29,7 +29,6 @@ abstract class DataTableColumn
         $this->label = $label ?? ucfirst($field);
     }
 
-
     /**
      * Mark the column as sortable.
      *
@@ -73,7 +72,7 @@ abstract class DataTableColumn
      */
     public function default(string $default)
     {
-        $this->defaultCallback = fn($value) => $value ?? $default;
+        $this->defaultCallback = fn ($value) => $value ?? $default;
 
         return $this;
     }
