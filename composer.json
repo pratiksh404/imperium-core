@@ -1,8 +1,8 @@
 {
     "name": "pratiksh/imperium",
-    "description": ":package_description",
+    "description": "Imperium admin panel core",
     "keywords": [
-        ":pratiksh",
+        "pratiksh",
         "laravel",
         "imperium"
     ],
@@ -10,7 +10,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": ":Pratik Shrestha",
+            "name": "Pratik Shrestha",
             "email": "pratikdai404@gmail.com",
             "role": "Developer"
         }
