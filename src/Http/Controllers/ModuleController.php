@@ -2,11 +2,11 @@
 
 namespace Pratiksh\Imperium\Http\Controllers;
 
-use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Pratiksh\Imperium\Services\ServerResponse;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ModuleController extends Controller
 {
@@ -73,7 +73,7 @@ class ModuleController extends Controller
         $studlyName = Str::studly($model);
 
         foreach ($possibleNamespaces as $namespace) {
-            $class = $namespace . $studlyName;
+            $class = $namespace.$studlyName;
 
             if (class_exists($class)) {
                 $instance = new $class;
