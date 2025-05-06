@@ -2,9 +2,10 @@
 
 namespace Pratiksh\Imperium\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
+use Pratiksh\Imperium\Services\ServerResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ModuleController extends Controller
@@ -25,10 +26,9 @@ class ModuleController extends Controller
             $record->trashed() ? $record->forceDelete() : $record->delete();
         });
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Records deleted successfully',
-        ]);
+        return ServerResponse::success('Records deleted successfully')
+            ->redirectTo($request->input('redirectTo') ?? route("{$model}.index"))
+            ->toResponse();
     }
 
     public function reorder(Request $request, $model)
@@ -50,7 +50,7 @@ class ModuleController extends Controller
         ]);
     }
 
-    public function restore($model, $id)
+    public function restore(Request $request, $model, $id)
     {
         // Convert model name to fully qualified class name
         $modelClass = $this->getModelClass($model);
@@ -58,10 +58,9 @@ class ModuleController extends Controller
         // Restore the record
         $modelClass::withTrashed()->find($id)->restore();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Record restored successfully',
-        ]);
+        return ServerResponse::success('Records restored successfully')
+            ->redirectTo($request->input('redirectTo') ?? route("{$model}.index"))
+            ->toResponse();
     }
 
     private function getModelClass(string $model): string
