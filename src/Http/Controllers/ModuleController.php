@@ -27,7 +27,7 @@ class ModuleController extends Controller
         });
 
         return ServerResponse::success('Records deleted successfully')
-            ->redirectTo($request->input('redirectTo') ?? route("{$model}.index"))
+            ->redirectTo($request->input('redirectTo') ?? route(Str::plural($model) . ".index"))
             ->toResponse();
     }
 
@@ -44,10 +44,9 @@ class ModuleController extends Controller
         // Reorder the records
         $modelClass::reorder($validated['ids']);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Records reordered successfully',
-        ]);
+        return ServerResponse::success('Records reordered successfully')
+            ->redirectTo($request->input('redirectTo') ?? route(Str::plural($model) . ".index"))
+            ->toResponse();
     }
 
     public function restore(Request $request, $model, $id)
@@ -59,7 +58,7 @@ class ModuleController extends Controller
         $modelClass::withTrashed()->find($id)->restore();
 
         return ServerResponse::success('Records restored successfully')
-            ->redirectTo($request->input('redirectTo') ?? route("{$model}.index"))
+            ->redirectTo($request->input('redirectTo') ?? route(Str::plural($model) . ".index"))
             ->toResponse();
     }
 

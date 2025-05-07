@@ -23,7 +23,7 @@ class ResourcefulRepository implements ResourcefulInterface
     public function index()
     {
         $user = Auth::user();
-        $model = $this->model::all()->map(function ($item) use ($user) {
+        $model = $this->model::sortByPosition()->map(function ($item) use ($user) {
             $item->can = [
                 'view' => $user->can('view', $item),
                 'update' => $user->can('update', $item),
@@ -48,7 +48,7 @@ class ResourcefulRepository implements ResourcefulInterface
 
         return [
             Str::plural($this->name) => $model,
-            'trashed_'.Str::plural($this->name) => $trashed_model,
+            'trashed_' . Str::plural($this->name) => $trashed_model,
         ];
     }
 
